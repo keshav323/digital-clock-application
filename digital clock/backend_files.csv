@@ -1,0 +1,14 @@
+filename,type,description
+package.json,Configuration,Node.js project configuration and dependencies
+server.js,Server,Main Express server with Socket.IO integration
+models/User.js,Model,User model with settings and preferences
+models/ClockSession.js,Model,Pomodoro and focus session tracking
+models/WeatherCache.js,Model,Weather data caching system
+routes/auth.js,API Route,"Authentication endpoints (login, register, guest)"
+routes/user.js,API Route,User management and settings
+routes/clock.js,API Route,Time synchronization and world clock
+routes/weather.js,API Route,Weather data and forecasting
+routes/pomodoro.js,API Route,Pomodoro timer and productivity tracking
+middleware/auth.js,Middleware,JWT authentication and authorization
+.env.example,Configuration,Environment variables template
+README.md,Documentation,Backend API documentation and setup guide

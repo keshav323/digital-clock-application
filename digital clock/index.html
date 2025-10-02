@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock Pro - Advanced Time Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkRpZ2l0YWwgQ2xvY2sgUHJvIiwKICAic2hvcnRfbmFtZSI6ICJDbG9ja1BybyIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMjEyMTIxIiwKICAidGhlbWVfY29sb3IiOiAiIzNCODJGNiIsCiAgImljb25zIjogW10KfQ==">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>⏰ ClockPro</h1>
+                </div>
+                <div class="header-controls">
+                    <button class="btn btn--sm theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        🌙
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-view="main">Main Clock</button>
+                <button class="nav-tab" data-view="world">World Clock</button>
+                <button class="nav-tab" data-view="pomodoro">Pomodoro</button>
+                <button class="nav-tab" data-view="settings">Settings</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Main Clock View -->
+            <section class="view active" id="main-view">
+                <div class="main-clock-container">
+                    <div class="time-display">
+                        <div class="current-time" id="currentTime">00:00:00</div>
+                        <div class="current-date" id="currentDate">Monday, September 15, 2025</div>
+                        <div class="timezone-info" id="timezoneInfo">Local Time</div>
+                    </div>
+                    <div class="weather-widget" id="weatherWidget">
+                        <div class="weather-info">
+                            <div class="weather-temp">24°C</div>
+                            <div class="weather-condition">Partly Cloudy</div>
+                            <div class="weather-location">Your Location</div>
+                            <div class="weather-details">
+                                <span>Humidity: 65%</span>
+                                <span>Wind: 8 km/h</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- World Clock View -->
+            <section class="view" id="world-view">
+                <div class="world-clock-header">
+                    <h2>World Clock</h2>
+                    <div class="world-clock-controls">
+                        <input type="text" class="form-control search-input" id="citySearch" placeholder="Search cities...">
+                        <button class="btn btn--primary" id="addCityBtn">Add City</button>
+                    </div>
+                </div>
+                <div class="world-clocks-grid" id="worldClocksGrid">
+                    <!-- World clock items will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Pomodoro Timer View -->
+            <section class="view" id="pomodoro-view">
+                <div class="pomodoro-container">
+                    <div class="pomodoro-header">
+                        <h2>Pomodoro Timer</h2>
+                        <div class="session-info">
+                            <span class="session-type" id="sessionType">Work Session</span>
+                            <span class="session-counter" id="sessionCounter">1/4</span>
+                        </div>
+                    </div>
+                    
+                    <div class="timer-display">
+                        <div class="timer-circle">
+                            <svg class="timer-svg" viewBox="0 0 100 100">
+                                <circle class="timer-track" cx="50" cy="50" r="45" />
+                                <circle class="timer-progress" cx="50" cy="50" r="45" id="timerProgress" />
+                            </svg>
+                            <div class="timer-time" id="timerTime">25:00</div>
+                        </div>
+                    </div>
+
+                    <div class="pomodoro-controls">
+                        <button class="btn btn--primary" id="startPauseBtn">Start</button>
+                        <button class="btn btn--secondary" id="resetBtn">Reset</button>
+                        <button class="btn btn--outline" id="skipBtn">Skip</button>
+                    </div>
+
+                    <div class="task-input-section">
+                        <input type="text" class="form-control" id="currentTask" placeholder="What are you working on?">
+                    </div>
+
+                    <div class="pomodoro-stats">
+                        <div class="stat">
+                            <div class="stat-value" id="completedSessions">0</div>
+                            <div class="stat-label">Completed Sessions</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="totalFocusTime">0h 0m</div>
+                            <div class="stat-label">Total Focus Time</div>
+                        </div>
+                    </div>
+
+                    <div class="ambient-sounds">
+                        <h4>Ambient Sounds</h4>
+                        <div class="sound-buttons">
+                            <button class="btn btn--sm sound-btn" data-sound="rain">Rain</button>
+                            <button class="btn btn--sm sound-btn" data-sound="forest">Forest</button>
+                            <button class="btn btn--sm sound-btn" data-sound="whitenoise">White Noise</button>
+                            <button class="btn btn--sm sound-btn" data-sound="ocean">Ocean</button>
+                            <button class="btn btn--sm sound-btn" data-sound="cafe">Cafe</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings View -->
+            <section class="view" id="settings-view">
+                <div class="settings-container">
+                    <h2>Settings</h2>
+                    
+                    <div class="settings-section">
+                        <h3>Theme</h3>
+                        <div class="theme-selector" id="themeSelector">
+                            <!-- Theme options will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Appearance</h3>
+                        <div class="form-group">
+                            <label class="form-label">Primary Color</label>
+                            <input type="color" class="form-control color-picker" id="primaryColor" value="#3B82F6">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Font Family</label>
+                            <select class="form-control" id="fontFamily">
+                                <option value="digital">Digital</option>
+                                <option value="sans-serif">Sans-serif</option>
+                                <option value="serif">Serif</option>
+                                <option value="monospace">Monospace</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Time Format</h3>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="timeFormat" value="12" checked> 12 Hour (2:30 PM)
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="timeFormat" value="24"> 24 Hour (14:30)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="showSeconds" checked> Show seconds
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Weather</h3>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="tempUnit" value="celsius" checked> Celsius
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="tempUnit" value="fahrenheit"> Fahrenheit
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Pomodoro Settings</h3>
+                        <div class="form-group">
+                            <label class="form-label">Work Duration (minutes)</label>
+                            <input type="number" class="form-control" id="workDuration" value="25" min="1" max="60">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Short Break (minutes)</label>
+                            <input type="number" class="form-control" id="shortBreak" value="5" min="1" max="30">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Long Break (minutes)</label>
+                            <input type="number" class="form-control" id="longBreak" value="15" min="1" max="60">
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Sound Settings</h3>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="soundNotifications" checked> Enable sound notifications
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Volume</label>
+                            <input type="range" class="range-input" id="volume" min="0" max="100" value="50">
+                        </div>
+                    </div>
+
+                    <div class="settings-actions">
+                        <button class="btn btn--primary" id="saveSettings">Save Settings</button>
+                        <button class="btn btn--secondary" id="resetSettings">Reset to Defaults</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Modal for City Selection -->
+    <div class="modal hidden" id="cityModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add City</h3>
+                <button class="modal-close" id="closeCityModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="city-suggestions" id="citySuggestions">
+                    <!-- City suggestions will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
